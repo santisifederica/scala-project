@@ -72,6 +72,15 @@ spark-submit --master "local[*]" --class Earthquake \
 **Google Cloud Dataproc**:
 
 ```bash
+# creazione del cluster (n2-standard-4 obbligatorio da specifiche del corso)
+gcloud dataproc clusters create <YOUR_CLUSTER_NAME> \
+  --region=<YOUR_REGION> \
+  --num-workers <N> \
+  --master-boot-disk-size 240 \
+  --worker-boot-disk-size 240 \
+  --master-machine-type=n2-standard-4 \
+  --worker-machine-type=n2-standard-4
+
 # upload jar e dataset su Cloud Storage
 gsutil cp target/scala-2.12/earthquake-assembly.jar gs://<YOUR_BUCKET>/jars/
 gsutil cp <your-dataset>.csv gs://<YOUR_BUCKET>/data/
@@ -86,6 +95,9 @@ gcloud dataproc jobs submit spark \
   gs://<YOUR_BUCKET>/data/<your-dataset>.csv \
   gs://<YOUR_BUCKET>/output/result.txt \
   <numPartitions>
+
+# eliminazione del cluster (buona pratica, evita consumo credit residuo)
+gcloud dataproc clusters delete <YOUR_CLUSTER_NAME> --region=<YOUR_REGION>
 ```
 
 ## Dataset
