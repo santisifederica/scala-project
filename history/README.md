@@ -14,3 +14,7 @@ documentativo per mostrare la progressione delle ottimizzazioni. Non fanno parte
   Separa inoltre una fase di solo conteggio delle coppie da una fase successiva di recupero delle date (solo
   sulla coppia vincente, sfruttando l'RDD intermedio già persistito), e rende `numPartitions` parametrico da
   riga di comando invece di lasciarlo implicito.
+
+Il confronto sperimentale tra le tre versioni (stesso cluster, stesso dataset) è riportato
+nella relazione del progetto: le versioni v1 e v2 risultano circa 9-10 volte più lente
+della versione finale.
