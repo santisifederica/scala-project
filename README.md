@@ -27,7 +27,7 @@ history/                      # versioni precedenti del codice, vedi history/REA
 build.sbt                     # config sbt + plugin assembly
 ```
 
-Il dataset **non è incluso** nel repository (vedi sezione [Dataset](#dataset)).
+Il dataset **non è incluso** nel repository.
 
 ## Technical Requirements
 
@@ -42,7 +42,6 @@ Il dataset **non è incluso** nel repository (vedi sezione [Dataset](#dataset)).
 ```bash
 sbt assembly
 ```
-
 Genera il fat jar in `target/scala-2.12/earthquake-assembly.jar`.
 
 ## Runtime Parameters
@@ -96,22 +95,21 @@ gcloud dataproc jobs submit spark \
   gs://<YOUR_BUCKET>/output/result.txt \
   <numPartitions>
 
-# eliminazione del cluster (buona pratica, evita consumo credit residuo)
+# eliminazione del cluster (per evitare eccessivo consumo di crediti)
 gcloud dataproc clusters delete <YOUR_CLUSTER_NAME> --region=<YOUR_REGION>
 ```
 
 ## Dataset
 
 Il dataset (alcuni milioni di righe) non è incluso nel repository per motivi di dimensione. Per eseguire
-il job serve un CSV con header contenente almeno le colonne:
+il job serve un CSV con header contenente le colonne:
 
 ```
 longitude,latitude,date
 ```
 
 dove `date` è una stringa che inizia con `yyyy-MM-dd` (l'eventuale timestamp dopo lo spazio viene
-ignorato). Un dataset di questo tipo (eventi sismici geolocalizzati) è reperibile ad es. da cataloghi
-sismici pubblici come USGS o EMSC.
+ignorato).
 
 ## Versioni precedenti
 
